@@ -7,5 +7,39 @@
   <select id="getTime" resultType="string">
   select now()
   </select>
+  
+  <select id="search2" resultType="string" >
+  
+  select title from tbl_board
+  
+  <foreach collection="_parameter.entrySet()" index="idx" item="keyword">
+    
+    <if test="idx == 't'.toString()">
+    title  like concat('%',#{keyword},'%')
+    </if>
+    <if test="idx == 'c'.toString()">
+    content  like concat('%',#{keyword},'%')
+    </if>
+    <if test="idx == 'w'.toString()">
+    writer  like concat('%',#{keyword},'%')
+    </if>
+  
+  </foreach>  
+  
+  </select>
+  
+  <select id="search1" resultType="string">
+  
+  select title from tbl_board 
+  <where>
+  
+  <if test="type eq 't'.toString()">
+  title like concat('%',#{keyword},'%')
+  </if>
+  
+  </where>
+  
+    
+  </select>
 
 </mapper>

@@ -24,6 +24,14 @@ public class BoardController {
 	@Setter(onMethod_={@Autowired})	
 	private BoardService service;
 	
+	@GetMapping("/view")
+	public void viewGet(@ModelAttribute("cri") Criteria cri, Long bno, Model model)throws Exception {
+		log.info("view get............");
+		
+		model.addAttribute("board", service.get(bno));
+		
+	}
+	
 	@GetMapping("/register")
 	public void registerGet() {
 		log.info("register get............");
@@ -54,6 +62,8 @@ public class BoardController {
 		model.addAttribute("list", service.getList(cri));
 		
 		int totalCount = service.getTotal(cri);
+		
+		log.info("totalCount: " + totalCount);
 		
 		PageMaker pm = new PageMaker(cri, totalCount);
 		

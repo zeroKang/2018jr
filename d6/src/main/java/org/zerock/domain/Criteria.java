@@ -1,7 +1,10 @@
 package org.zerock.domain;
 
+import lombok.Getter;
+
 public class Criteria {
 
+	@Getter
 	private int page;
 	
 	public Criteria() {
